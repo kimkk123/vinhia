@@ -1,0 +1,50 @@
+name: TaoVPS
+
+on: 
+
+  workflow_dispatch:
+
+    inputs:
+
+      authcode:
+
+        description: '1pqdNlEhJmTDF7KC21rFcAwcrHJ_5tnBcJA6pJvWfn2QZtP1J'
+
+        required: true
+
+      pincode:
+
+        description: '772003'
+
+        required: true
+
+  
+
+jobs:
+
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Initializing Setup
+
+      run: ./caidat.ps1
+
+    - name: Khởi động VPS
+
+      run: ${{ github.event.inputs.authcode }} -pin=${{ github.event.inputs.pincode }}
+
+    - name: Keep Alive
+
+      run: ./time.ps1
+
+
+
+
+
+
+
